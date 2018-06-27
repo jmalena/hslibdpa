@@ -7,3 +7,6 @@
 [submodule "vendor/clibspi"]
 	path = vendor/clibspi
 	url = https://github.com/iqrfsdk/clibspi
+[submodule "vendor/cutils"]
+	path = vendor/cutils
+	url = https://github.com/iqrfsdk/cutils
