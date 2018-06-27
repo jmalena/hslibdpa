@@ -1,0 +1,3 @@
+[submodule "vendor/clibdpa"]
+	path = vendor/clibdpa
+	url = https://github.com/iqrfsdk/clibdpa
