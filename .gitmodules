@@ -4,3 +4,6 @@
 [submodule "vendor/clibcdc"]
 	path = vendor/clibcdc
 	url = https://github.com/iqrfsdk/clibcdc
+[submodule "vendor/clibspi"]
+	path = vendor/clibspi
+	url = https://github.com/iqrfsdk/clibspi
