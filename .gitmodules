@@ -1,12 +1,12 @@
-[submodule "vendor/clibdpa"]
-	path = vendor/clibdpa
+[submodule "deps/clibdpa"]
+	path = deps/clibdpa
 	url = https://github.com/iqrfsdk/clibdpa
-[submodule "vendor/clibcdc"]
-	path = vendor/clibcdc
+[submodule "deps/clibcdc"]
+	path = deps/clibcdc
 	url = https://github.com/iqrfsdk/clibcdc
-[submodule "vendor/clibspi"]
-	path = vendor/clibspi
+[submodule "deps/clibspi"]
+	path = deps/clibspi
 	url = https://github.com/iqrfsdk/clibspi
-[submodule "vendor/cutils"]
-	path = vendor/cutils
+[submodule "deps/cutils"]
+	path = deps/cutils
 	url = https://github.com/iqrfsdk/cutils
