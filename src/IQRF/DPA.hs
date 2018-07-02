@@ -1,6 +1,11 @@
 {-# LANGUAGE ForeignFunctionInterface #-}
 
-module IQRF.DPA (createHandler, blink) where
+module IQRF.DPA
+  ( Handler
+  , HandlerPtr
+  , createHandler
+  , blink
+  ) where
 
 import Foreign.Ptr
 import IQRF.DPA.Channel

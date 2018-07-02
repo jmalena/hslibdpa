@@ -1,6 +1,8 @@
 {-# LANGUAGE ForeignFunctionInterface #-}
 
-module IQRF.DPA.Channel.SPI (createSPIChannel) where
+module IQRF.DPA.Channel.SPI
+  ( createSPIChannel
+  ) where
 
 import Foreign.Marshal
 import IQRF.SPI

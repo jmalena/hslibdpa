@@ -1,6 +1,10 @@
 {-# LANGUAGE CPP #-}
 
-module IQRF.SPI where
+module IQRF.SPI
+  ( Config
+  , ConfigPtr
+  , defaultConfig
+  ) where
 
 import Foreign.C
 import Foreign.Ptr
