@@ -4,6 +4,7 @@ module IQRF.SPI where
 
 import Foreign.C
 import Foreign.Ptr
+import Foreign.Marshal
 import Foreign.Storable
 import Data.Word
 import Control.Monad
@@ -31,13 +32,13 @@ instance Storable Config where
     <*> #{peek spi_iqrf_config_struct, spiMosiGpioPin} p
     <*> #{peek spi_iqrf_config_struct, spiClkGpioPin} p
   poke p config = do
-    spiDevPtr <- newCString $ spiDev config
-    #{poke spi_iqrf_config_struct, spiDev} p $ spiDevPtr
+    pokeSpiDev (#{ptr spi_iqrf_config_struct, spiDev} p) $ spiDev config
     #{poke spi_iqrf_config_struct, enableGpioPin} p $ enableGpioPin config
     #{poke spi_iqrf_config_struct, spiCe0GpioPin} p $ spiCe0GpioPin config
     #{poke spi_iqrf_config_struct, spiMisoGpioPin} p $ spiMisoGpioPin config
     #{poke spi_iqrf_config_struct, spiMosiGpioPin} p $ spiMosiGpioPin config
     #{poke spi_iqrf_config_struct, spiClkGpioPin} p $ spiClkGpioPin config
+    where pokeSpiDev p val = withCString val (peekArray (length val) >=> pokeArray p)
 
 defaultConfig :: Config
 defaultConfig = Config
