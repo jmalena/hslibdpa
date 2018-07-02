@@ -5,7 +5,9 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-  void blink();
+  void *spi_new_channel(spi_iqrf_config_struct *);
+  void *dpa_new_handler(void *);
+  void blink(void *);
 #ifdef __cplusplus
 }
 #endif

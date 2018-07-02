@@ -14,6 +14,8 @@ cabal-version:       >=1.10
 
 library
   exposed-modules:     IQRF.SPI
+                       IQRF.DPA
+                       IQRF.DPA.Channel
                        IQRF.DPA.Channel.SPI
   build-depends:       base >=4.9 && <4.10
   hs-source-dirs:      src

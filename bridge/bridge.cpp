@@ -2,17 +2,26 @@
 #include "IqrfSpiChannel.h"
 #include "DpaHandler2.h"
 
-void blink() {
-  spi_iqrf_config_struct cfg = IqrfSpiChannel::SPI_IQRF_CFG_DEFAULT;
-  IChannel *spi = new IqrfSpiChannel(cfg);
-  DpaHandler2 *handler = new DpaHandler2(spi);
+void *spi_new_channel(spi_iqrf_config_struct *cfg) {
+  return new IqrfSpiChannel(*cfg);
+}
+
+void *dpa_new_handler(void *ptr) {
+  IqrfSpiChannel *channel = static_cast<IqrfSpiChannel *>(ptr);
+
+  return new DpaHandler2(channel);
+}
+
+void blink(void *ptr) {
+  DpaHandler2 *handler = static_cast<DpaHandler2 *>(ptr);
 
   DpaMessage request;
   request.DpaPacket().DpaRequestPacket_t.NADR = 0x00;
-  request.DpaPacket().DpaRequestPacket_t.PNUM = 0x07;
+  request.DpaPacket().DpaRequestPacket_t.PNUM = 0x06;
   request.DpaPacket().DpaRequestPacket_t.PCMD = 0x03;
   request.DpaPacket().DpaRequestPacket_t.HWPID = 0xFFFF;
   request.SetLength(sizeof(TDpaIFaceHeader));
 
-  handler->executeDpaTransaction(request, 1000);
+  auto dt = handler->executeDpaTransaction(request, 1000);
+  auto res = dt->get();
 }
