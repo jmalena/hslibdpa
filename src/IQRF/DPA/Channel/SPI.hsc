@@ -3,7 +3,7 @@
 
 module IQRF.DPA.Channel.SPI
   ( defaultConfig
-  , createSPIChannel
+  , createChannel
   ) where
 
 import Foreign.Marshal
@@ -26,5 +26,5 @@ defaultConfig = Config
   #{const MOSI_GPIO}
   #{const SCLK_GPIO}
 
-createSPIChannel :: Config -> IO ChannelPtr
-createSPIChannel cfg = with cfg spi_new_channel
+createChannel :: Config -> IO ChannelPtr
+createChannel cfg = with cfg spi_new_channel
