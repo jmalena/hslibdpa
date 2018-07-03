@@ -2,7 +2,9 @@
 #include "IqrfSpiChannel.h"
 #include "DpaHandler2.h"
 
-void *spi_new_channel(spi_iqrf_config_struct *cfg) {
+void *spi_new_channel(void *ptr) {
+  spi_iqrf_config_struct *cfg = static_cast<spi_iqrf_config_struct *>(ptr);
+
   return new IqrfSpiChannel(*cfg);
 }
 

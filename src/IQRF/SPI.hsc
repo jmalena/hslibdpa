@@ -12,7 +12,8 @@ import Foreign.Storable
 import Data.Word
 import Control.Monad
 
-#include "bridge.h"
+#include <stdint.h> // fix: spi_iqrf.h does not contains stdint.h
+#include "spi_iqrf.h"
 
 data Config = Config { spiDev :: String
                      , enableGpioPin :: Word8

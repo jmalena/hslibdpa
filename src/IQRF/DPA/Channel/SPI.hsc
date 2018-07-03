@@ -10,7 +10,9 @@ import Foreign.Marshal
 import IQRF.SPI
 import IQRF.DPA.Channel
 
-#include "bridge.h"
+#include <stdint.h> // fix: spi_iqrf.h does not contains stdint.h
+#include "spi_iqrf.h"
+#include "machines_def.h"
 
 foreign import ccall "bridge.h spi_new_channel"
   spi_new_channel :: ConfigPtr -> IO ChannelPtr
