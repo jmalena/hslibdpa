@@ -1,9 +1,8 @@
 {-# LANGUAGE CPP #-}
 
 module IQRF.SPI
-  ( Config
+  ( Config(..)
   , ConfigPtr
-  , defaultConfig
   ) where
 
 import Foreign.C
@@ -43,12 +42,3 @@ instance Storable Config where
     #{poke spi_iqrf_config_struct, spiMosiGpioPin} p $ spiMosiGpioPin config
     #{poke spi_iqrf_config_struct, spiClkGpioPin} p $ spiClkGpioPin config
     where pokeSpiDev p val = withCString val (peekArray (length val) >=> pokeArray p)
-
-defaultConfig :: Config
-defaultConfig = Config
-  #{const_str SPI_IQRF_DEFAULT_SPI_DEVICE}
-  #{const ENABLE_GPIO}
-  #{const CE0_GPIO}
-  #{const MISO_GPIO}
-  #{const MOSI_GPIO}
-  #{const SCLK_GPIO}
