@@ -1,9 +1,13 @@
+#include <stdint.h>
+
+#define MAX_DPA_BUFFER 64 // workaround, originally defined in DpaMessage.h
+
 #ifdef __cplusplus
 extern "C" {
 #endif
   void *spi_new_channel(void *);
   void *dpa_new_handler(void *);
-  void blink(void *);
+  int dpa_send_request(void *, int32_t, uint8_t *, int, uint8_t *);
 #ifdef __cplusplus
 }
 #endif

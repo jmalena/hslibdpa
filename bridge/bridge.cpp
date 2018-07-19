@@ -1,29 +1,34 @@
+#include <string.h>
 #include "bridge.h"
 #include "IqrfSpiChannel.h"
 #include "DpaHandler2.h"
+#include "DpaMessage.h"
+#include "IDpaTransaction2.h"
+#include "IDpaTransactionResult2.h"
 
-void *spi_new_channel(void *ptr) {
-  spi_iqrf_config_struct *cfg = static_cast<spi_iqrf_config_struct *>(ptr);
+void *spi_new_channel(void *cfg_ptr) {
+  spi_iqrf_config_struct *cfg = static_cast<spi_iqrf_config_struct *>(cfg_ptr);
 
   return new IqrfSpiChannel(*cfg);
 }
 
-void *dpa_new_handler(void *ptr) {
-  IqrfSpiChannel *channel = static_cast<IqrfSpiChannel *>(ptr);
+void *dpa_new_handler(void *channel_ptr) {
+  IqrfSpiChannel *channel = static_cast<IqrfSpiChannel *>(channel_ptr);
 
   return new DpaHandler2(channel);
 }
 
-void blink(void *ptr) {
-  DpaHandler2 *handler = static_cast<DpaHandler2 *>(ptr);
+int dpa_send_request(void *handler_ptr, int32_t timeout, uint8_t *res_buf, int len, uint8_t *buf) {
+  DpaHandler2 *handler = static_cast<DpaHandler2 *>(handler_ptr);
 
   DpaMessage request;
-  request.DpaPacket().DpaRequestPacket_t.NADR = 0x00;
-  request.DpaPacket().DpaRequestPacket_t.PNUM = 0x06;
-  request.DpaPacket().DpaRequestPacket_t.PCMD = 0x03;
-  request.DpaPacket().DpaRequestPacket_t.HWPID = 0xFFFF;
-  request.SetLength(sizeof(TDpaIFaceHeader));
+  memcpy(request.DpaPacket().Buffer, buf, len);
+  request.SetLength(len);
 
-  auto dt = handler->executeDpaTransaction(request, 1000);
-  auto res = dt->get();
+  std::shared_ptr<IDpaTransaction2> transaction = handler->executeDpaTransaction(request, timeout);
+  std::unique_ptr<IDpaTransactionResult2> result = transaction->get();
+  const DpaMessage &response = result->getResponse();
+
+  memcpy(res_buf, response.DpaPacket().Buffer, MAX_DPA_BUFFER);
+  return response.GetLength();
 }

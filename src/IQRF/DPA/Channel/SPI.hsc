@@ -1,4 +1,3 @@
-{-# LANGUAGE CPP #-}
 {-# LANGUAGE ForeignFunctionInterface #-}
 
 module IQRF.DPA.Channel.SPI

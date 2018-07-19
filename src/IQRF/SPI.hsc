@@ -1,5 +1,3 @@
-{-# LANGUAGE CPP #-}
-
 module IQRF.SPI
   ( Config(..)
   , ConfigPtr
