@@ -26,13 +26,7 @@ type ConfigPtr = Ptr Config
 instance Storable Config where
   sizeOf _ = #{size spi_iqrf_config_struct}
   alignment _ = #{alignment spi_iqrf_config_struct}
-  peek p = Config
-    <$> (#{peek spi_iqrf_config_struct, enableGpioPin} >=> peekCString) p
-    <*> #{peek spi_iqrf_config_struct, enableGpioPin} p
-    <*> #{peek spi_iqrf_config_struct, spiCe0GpioPin} p
-    <*> #{peek spi_iqrf_config_struct, spiMisoGpioPin} p
-    <*> #{peek spi_iqrf_config_struct, spiMosiGpioPin} p
-    <*> #{peek spi_iqrf_config_struct, spiClkGpioPin} p
+  peek p = undefined -- peek is not necessary in this case
   poke p config = do
     pokeSpiDev (#{ptr spi_iqrf_config_struct, spiDev} p) $ spiDev config
     #{poke spi_iqrf_config_struct, enableGpioPin} p $ enableGpioPin config
