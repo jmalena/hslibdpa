@@ -19,7 +19,7 @@ data Config = Config { spiDev :: String
                      , spiMisoGpioPin :: Word8
                      , spiMosiGpioPin :: Word8
                      , spiClkGpioPin :: Word8
-                     }
+                     } deriving (Show)
 
 type ConfigPtr = Ptr Config
 
