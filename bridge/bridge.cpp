@@ -1,8 +1,8 @@
-#include <string.h>
 #include "bridge.h"
 #include "IqrfSpiChannel.h"
 #include "DpaHandler2.h"
 #include "DpaMessage.h"
+#include "IDpaHandler2.h"
 #include "IDpaTransaction2.h"
 #include "IDpaTransactionResult2.h"
 
@@ -18,17 +18,17 @@ void *dpa_new_handler(void *channel_ptr) {
   return new DpaHandler2(channel);
 }
 
-int dpa_send_request(void *handler_ptr, int32_t timeout, uint8_t *res_buf, int len, uint8_t *buf) {
-  DpaHandler2 *handler = static_cast<DpaHandler2 *>(handler_ptr);
+int dpa_send_request(void *handler_ptr, int32_t timeout, uint8_t *out_buf, int in_buf_len, const uint8_t *in_buf) {
+  IDpaHandler2 *handler = static_cast<IDpaHandler2 *>(handler_ptr);
 
   DpaMessage request;
-  memcpy(request.DpaPacket().Buffer, buf, len);
-  request.SetLength(len);
+  request.DataToBuffer(in_buf, in_buf_len);
 
-  std::shared_ptr<IDpaTransaction2> transaction = handler->executeDpaTransaction(request, timeout);
+  std::shared_ptr<IDpaTransaction2> transaction = handler->executeDpaTransaction(request, timeout, IDpaTransactionResult2::TRN_OK);
   std::unique_ptr<IDpaTransactionResult2> result = transaction->get();
   const DpaMessage &response = result->getResponse();
+  const uint8_t *res_buf = response.DpaPacket().Buffer;
+  std::copy(res_buf, res_buf + MAX_DPA_BUFFER, out_buf);
 
-  memcpy(res_buf, response.DpaPacket().Buffer, MAX_DPA_BUFFER);
   return response.GetLength();
 }

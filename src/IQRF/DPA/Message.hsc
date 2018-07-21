@@ -45,7 +45,7 @@ parseHeader buf = do
   (nadr:pnumHi:pnumLo:pcmd:hwpidHi:hwpidLo:buf') <- return buf
   let pnum = packWord16 pnumHi pnumLo
   let pwpid = packWord16 hwpidHi hwpidLo
-  return ((nadr, pnum, pcmd, pwpid), buf)
+  return ((nadr, pnum, pcmd, pwpid), buf')
 
 packWord16 :: Word8 -> Word8 -> Word16
 packWord16 hi lo = fromIntegral $ (hi `shiftR` 8) .&. lo
