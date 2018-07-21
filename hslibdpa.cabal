@@ -13,8 +13,7 @@ extra-source-files:  ChangeLog.md
 cabal-version:       >=1.10
 
 library
-  exposed-modules:     IQRF.SPI
-                       IQRF.DPA
+  exposed-modules:     IQRF.DPA
                        IQRF.DPA.Message
                        IQRF.DPA.Channel
                        IQRF.DPA.Channel.SPI
