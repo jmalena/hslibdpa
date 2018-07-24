@@ -28,3 +28,13 @@ library
                        /home/pi/hslibdpa/deps/clibcdc/build/Unix_Makefiles/lib
                        /home/pi/hslibdpa/deps/clibdpa/build/Unix_Makefiles/lib
   extra-libraries:     bridge IqrfCdcChannel IqrfSpiChannel Dpa IqrfTracer spi_iqrf sysfs_gpio cdc pthread stdc++
+
+test-suite spec
+  type:                exitcode-stdio-1.0
+  main-is:             Spec.hs
+  hs-source-dirs:      test
+  build-depends:       base >=4.9 && <4.10,
+                       hspec >=2.5 && <2.6,
+                       HUnit >=1.6 && <1.7,
+                       hslibdpa
+  default-language:    Haskell2010
