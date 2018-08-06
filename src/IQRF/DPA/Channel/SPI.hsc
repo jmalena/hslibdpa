@@ -7,13 +7,16 @@ module IQRF.DPA.Channel.SPI
   , createChannel
   ) where
 
+import Control.Monad
+
+import Data.Word
+
 import Foreign.C
 import Foreign.Ptr
 import Foreign.Marshal
 import Foreign.Storable
-import Data.Word
-import Control.Monad
-import IQRF.DPA.Channel
+
+import IQRF.DPA.Internal.Channel
 
 #include <stdint.h> // fix: spi_iqrf.h missing stdint.h
 #include "spi_iqrf.h"

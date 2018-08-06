@@ -14,9 +14,9 @@ cabal-version:       >=1.10
 
 library
   exposed-modules:     IQRF.DPA
-                       IQRF.DPA.Message
-                       IQRF.DPA.Channel
                        IQRF.DPA.Channel.SPI
+                       IQRF.DPA.Internal.Channel
+                       IQRF.DPA.Internal.Message
   build-depends:       base >=4.9 && <4.10
   hs-source-dirs:      src
   default-language:    Haskell2010

@@ -1,7 +1,4 @@
-module IQRF.DPA.Channel
-  ( Channel
-  , ChannelPtr
-  ) where
+module IQRF.DPA.Internal.Channel where
 
 import Foreign.Ptr
 

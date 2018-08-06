@@ -1,18 +1,23 @@
 {-# LANGUAGE ForeignFunctionInterface #-}
 
 module IQRF.DPA
-  ( Handler
+  ( ChannelPtr
   , HandlerPtr
+  , Request
+  , Response
   , createHandler
+  , mkRequest
   , sendRequest
   ) where
 
 import Data.Int
 import Data.Word
+
 import Foreign.Ptr
 import Foreign.Marshal
-import IQRF.DPA.Message
-import IQRF.DPA.Channel
+
+import IQRF.DPA.Internal.Channel
+import IQRF.DPA.Internal.Message
 
 #include "bridge.h"
 

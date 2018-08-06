@@ -1,8 +1,8 @@
-module IQRF.DPA.MessageSpec where
+module IQRF.DPA.Internal.MessageSpec where
 
 import Test.Hspec
 import Test.HUnit
-import IQRF.DPA.Message
+import IQRF.DPA.Internal.Message
 
 spec :: Spec
 spec = do
