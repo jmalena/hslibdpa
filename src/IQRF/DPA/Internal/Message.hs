@@ -33,9 +33,6 @@ instance Buffer Response where
     return $ Response nadr pnum pcmd hwpid responseCode dpaValue payload
   toBuffer = undefined
 
-mkRequest :: Word16 -> Word8 -> Word8 -> Word16 -> [Word8] -> Request
-mkRequest = Request
-
 parseHeader :: [Word8] -> Maybe ((Word16, Word8, Word8, Word16), [Word8])
 parseHeader buf = do
   (nadrL:nadrH:pnum:pcmd:hwpidL:hwpidH:buf') <- return buf

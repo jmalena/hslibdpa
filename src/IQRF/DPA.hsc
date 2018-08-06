@@ -3,10 +3,9 @@
 module IQRF.DPA
   ( ChannelPtr
   , HandlerPtr
-  , Request
-  , Response
+  , Request (..)
+  , Response (..)
   , createHandler
-  , mkRequest
   , sendRequest
   ) where
 
