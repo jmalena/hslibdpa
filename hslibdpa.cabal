@@ -34,9 +34,12 @@ library
 test-suite spec
   type:                exitcode-stdio-1.0
   main-is:             Spec.hs
-  hs-source-dirs:      test
+  other-modules:       IQRF.DPASpec
+                       IQRF.DPA.Internal.MessageSpec
+                       IQRF.DPA.Internal.Utils.BytesSpec
   build-depends:       base >=4.11 && <4.12,
                        hspec >=2.5 && <2.6,
                        HUnit >=1.6 && <1.7,
                        hslibdpa
+  hs-source-dirs:      test
   default-language:    Haskell2010
