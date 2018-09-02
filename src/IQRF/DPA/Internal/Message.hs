@@ -4,7 +4,7 @@ module IQRF.DPA.Internal.Message where
 
 import Data.Word
 
-import IQRF.DPA.Internal.Bytes
+import IQRF.DPA.Internal.Utils.Bytes
 
 class Buffer a where
   fromBuffer :: [Word8] -> Maybe a

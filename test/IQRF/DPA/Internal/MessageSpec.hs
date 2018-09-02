@@ -2,6 +2,7 @@ module IQRF.DPA.Internal.MessageSpec where
 
 import Test.Hspec
 import Test.HUnit
+
 import IQRF.DPA.Internal.Message
 
 spec :: Spec
