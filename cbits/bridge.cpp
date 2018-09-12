@@ -15,7 +15,16 @@ void *spi_new_channel(void *cfg_ptr) {
 void *dpa_new_handler(void *channel_ptr) {
   IqrfSpiChannel *channel = static_cast<IqrfSpiChannel *>(channel_ptr);
 
-  return new DpaHandler2(channel);
+  IDpaHandler2 *handler = new DpaHandler2(channel);
+  handler->setRfCommunicationMode(IDpaTransaction2::kStd);
+
+  IDpaTransaction2::FRC_TimingParams frcTiming;
+  frcTiming.bondedNodes = 64;
+  frcTiming.discoveredNodes = 64;
+  frcTiming.responseTime = IDpaTransaction2::FrcResponseTime::k20620Ms;
+  handler->setFrcTiming(frcTiming);
+
+  return handler;
 }
 
 int dpa_send_request(void *handler_ptr, int32_t timeout, uint8_t *out_buf, int in_buf_len, const uint8_t *in_buf) {
