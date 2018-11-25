@@ -10,13 +10,23 @@ class Buffer a where
   fromBuffer :: [Word8] -> Maybe a
   toBuffer :: a -> [Word8]
 
-data Request
-  = Request Word16 Word8 Word8 Word16 [Word8]
-  deriving (Eq, Show)
+data Request = Request
+  { nadr :: Word16
+  , pnum :: Word8
+  , pcmd :: Word8
+  , hwpid :: Word16
+  , payload :: [Word8]
+  } deriving (Eq, Show)
 
-data Response
-  = Response Word16 Word8 Word8 Word16 Word8 Word8 [Word8]
-  deriving (Eq, Show)
+data Response = Response
+  { nadr :: Word16
+  , pnum :: Word8
+  , pcmd :: Word8
+  , hwpid :: Word16
+  , responseCode :: Word8
+  , dpaValue :: Word8
+  , payload :: [Word8]
+  } deriving (Eq, Show)
 
 instance Buffer Request where
   fromBuffer = undefined
