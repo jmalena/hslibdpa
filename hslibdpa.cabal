@@ -14,6 +14,7 @@ cabal-version:       >=1.10
 
 library
   exposed-modules:     IQRF.DPA
+                       IQRF.DPA.FRC
                        IQRF.DPA.Channel.SPI
                        IQRF.DPA.Internal.Channel
                        IQRF.DPA.Internal.Message

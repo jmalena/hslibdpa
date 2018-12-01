@@ -1,6 +1,7 @@
 #include <stdint.h>
 
-#define MAX_DPA_BUFFER 64 // workaround, originally defined in DpaMessage.h
+// originally defined in DpaMessage.h
+#define MAX_DPA_BUFFER 64
 
 #ifdef __cplusplus
 extern "C" {
