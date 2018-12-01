@@ -19,7 +19,7 @@ library
                        IQRF.DPA.Internal.Channel
                        IQRF.DPA.Internal.Message
                        IQRF.DPA.Internal.Utils.Bytes
-  build-depends:       base >=4.11 && <4.12,
+  build-depends:       base >=4.10 && <4.11,
                        vector >=0.12 && <0.13
   hs-source-dirs:      src
   default-language:    Haskell2010
@@ -38,7 +38,7 @@ test-suite spec
   other-modules:       IQRF.DPASpec
                        IQRF.DPA.Internal.MessageSpec
                        IQRF.DPA.Internal.Utils.BytesSpec
-  build-depends:       base >=4.11 && <4.12,
+  build-depends:       base >=4.10 && <4.11,
                        hspec >=2.5 && <2.6,
                        HUnit >=1.6 && <1.7,
                        hslibdpa
