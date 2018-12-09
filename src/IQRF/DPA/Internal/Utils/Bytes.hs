@@ -1,6 +1,7 @@
 module IQRF.DPA.Internal.Utils.Bytes where
 
-import Control.Arrow ((&&&))
+import Control.Monad
+import Control.Arrow
 
 import Data.Bits
 import Data.Word
@@ -14,7 +15,15 @@ unpackWord16LE = unpackL &&& unpackH
   where unpackL = fromIntegral . (.&. 0xFF)
         unpackH = fromIntegral . (`shiftR` 8) . (.&. 0xFF00)
 
-bitSet :: Int -> [Int] -> [Word8]
-bitSet n xs = V.toList $ V.accum setBit vec pairs
+toBitSet :: Int -> [Int] -> [Word8]
+toBitSet n xs = V.toList $ V.accum setBit vec pairs
   where vec = V.replicate n 0
         pairs = ((`div` 8) &&& (`mod` 8)) <$> xs
+
+fromBitSet :: [Word8] -> [Int]
+fromBitSet xs = do
+  i <- [0..length xs-1]
+  j <- [0..8]
+  guard $ testBit (vec V.! i) j
+  return $ 8*i+j
+  where vec = V.fromList xs

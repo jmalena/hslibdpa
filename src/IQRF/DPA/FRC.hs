@@ -1,7 +1,9 @@
 {-# LANGUAGE PatternSynonyms #-}
 
 module IQRF.DPA.FRC
-  ( pattern K40Ms
+  ( Bytes.toBitSet
+  , Bytes.fromBitSet
+  , pattern K40Ms
   , pattern K360Ms
   , pattern K680Ms
   , pattern K1320Ms
@@ -17,7 +19,7 @@ module IQRF.DPA.FRC
 import Data.Word
 
 import IQRF.DPA.Internal.Message
-import IQRF.DPA.Internal.Utils.Bytes
+import IQRF.DPA.Internal.Utils.Bytes as Bytes
 
 newtype FrcResponseTime = FrcResponseTime { unFrcResponseTime :: Word8 }
 
@@ -42,4 +44,4 @@ makeFrcSetFrcParams hwpid (FrcResponseTime resTime) =
 makeFrcSendSelectiveRequest :: Word16 -> Word8 -> [Word16] -> [Word8] -> Request
 makeFrcSendSelectiveRequest hwpid cmd nadrs userData =
   Request 0x0000 0x0D 0x02 hwpid (cmd:(selectedNodes++userData))
-  where selectedNodes = bitSet 30 (fromIntegral <$> nadrs)
+  where selectedNodes = toBitSet 30 (fromIntegral <$> nadrs)
